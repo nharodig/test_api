@@ -1,0 +1,30 @@
+services:
+  vorian-services-api:
+    container_name: vorian-services-api
+    build:
+      context: app
+      dockerfile: ./docker/Dockerfile
+    environment:
+      - INIT_DB_COMPOSE_DO_NOT_USE_IN_PRODUCTION=True
+    env_file:
+      - ./app/docker/reference.env
+    ports:
+      - "5009:5009"
+    volumes:
+      - ./app:/app
+
+  vorian_db_api:
+    image: postgres:17
+    container_name: vorian_users_db_api
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=Users
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./app/alembic_consolidated/init_db_docker_compose.sql:/docker-entrypoint-initdb.d/db.sql
+      - ./postgres_data:/var/lib/postgresql/data
+    command: -p 5432
+

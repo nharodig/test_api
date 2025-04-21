@@ -1,0 +1,25 @@
+# API Server
+fastapi
+uvicorn[standard]
+pydantic[email]
+
+# Database
+SQLAlchemy
+dnspython
+
+# Development
+pip-tools
+black
+flake8
+retrying
+pydantic-settings
+botocore
+boto3
+pandas
+opensearch-py
+pyairtable
+psycopg2
+cuid
+jsonschema
+newrelic
+alembic
